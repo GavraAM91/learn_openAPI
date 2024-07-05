@@ -1,36 +1,116 @@
 {
-    "openapi":"3.0.3",
-    "info": {
-      "title":"Todolist RESTful Title",
-      "version":"1",
-      "description": "Open API for Todolist RESTful API ",
-      "termsOfService": "https://www.programmerzamannow.com",
-      "contact": {
-        "name": "Gavra Arva Maheswara",
-        "email": "gavramaheswara07@gmail.com",
-        "url" : "https://www.programmerzamannow.com"
-      },
-      "license": {
-        "name": "APACHE 2.0",
-        "url": "https://www.apache.org/licenses/LICENSE-2.0"
-      }
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Todolist RESTful Title",
+    "version": "1",
+    "description": "Open API for Todolist RESTful API ",
+    "termsOfService": "https://www.programmerzamannow.com",
+    "contact": {
+      "name": "Gavra Arva Maheswara",
+      "email": "gavramaheswara07@gmail.com",
+      "url": "https://www.programmerzamannow.com"
     },
-    "servers": [
-      {
-        "description": "Todolist RESTful API Server",
-        "url":"https://{environment}.programmerzamannow.com/api/v1",
-        "variables": {
-          "environment": {
-            "description": "Server environment",
-            "default": "dev",
-            "enum": [
-              "dev",
-              "qa",
-              "prod"
-            ]
-          }
+    "license": {
+      "name": "APACHE 2.0",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0"
+    }
+  },
+  "servers": [
+    {
+      "description": "Todolist RESTful API Server",
+      "url": "https://{environment}.programmerzamannow.com/api/v1",
+      "variables": {
+        "environment": {
+          "description": "Server environment",
+          "default": "dev",
+          "enum": [
+            "dev",
+            "qa",
+            "prod"
+          ]
         }
       }
-    ],
-    "paths": { }
+    }
+  ],
+  "externalDocs": {
+    "description": "Test Github Gavra",
+    "url": "https://github.com/GavraAM91/learn_openAPI"
+  },
+  "paths": {
+    "/todolist": {
+      "get": {
+        "summary": "Get ALL Todolist",
+        "description": "get all active todolist by default",
+        "parameters": [
+          {
+            "name": "include done",
+            "in": "query",
+            "required": false,
+            "description": "is include done todolist",
+            "schema" :{
+              "type": "boolean",
+              "nullable": true,
+              "default": false
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "filter todolist by name ",
+              "schema":{
+                "type": "string",
+                "nullable": true,
+                "minLength": 1,
+                "maxLength": 100
+              }
+          }
+        ],
+        "responses": {}
+      },
+      "post": {
+        "summary": "Create new Todolist",
+        "description": "Create new Todolist to database",
+        "responses": {}
+      }
+    },
+    "/todolist/{todolistId}": {
+      "put": {
+        "summary": "Update existing todolist",
+        "description": "Update existing todolist to database",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "description": "Todolist id for update",
+            "schema":{
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "summary": "delete existing todolist",
+        "description": "delete existing todolist in database",
+        "parameters": [
+          {
+            "name": "todolistId",
+            "in": "path",
+            "required": true,
+            "description": "Todolist id for deleted",
+            "schema":{
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          }
+        ],
+        "responses": {}
+      }
+    }
   }
+}
