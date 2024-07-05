@@ -47,7 +47,7 @@
             "in": "query",
             "required": false,
             "description": "is include done todolist",
-            "schema" :{
+            "schema": {
               "type": "boolean",
               "nullable": true,
               "default": false
@@ -58,12 +58,12 @@
             "in": "query",
             "required": false,
             "description": "filter todolist by name ",
-              "schema":{
-                "type": "string",
-                "nullable": true,
-                "minLength": 1,
-                "maxLength": 100
-              }
+            "schema": {
+              "type": "string",
+              "nullable": true,
+              "minLength": 1,
+              "maxLength": 100
+            }
           }
         ],
         "responses": {}
@@ -71,6 +71,29 @@
       "post": {
         "summary": "Create new Todolist",
         "description": "Create new Todolist to database",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 0,
+                    "required": true
+                  },
+                  "priority": {
+                    "type": "integer",
+                    "format": "int32",
+                    "required": true,
+                    "default": 1
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {}
       }
     },
@@ -84,13 +107,36 @@
             "in": "path",
             "required": true,
             "description": "Todolist id for update",
-            "schema":{
+            "schema": {
               "type": "string",
               "minLength": 1,
               "maxLength": 100
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name":{
+                    "type": "string",
+                    "minLength": 1,
+                    "required": true
+                  },
+                  "priority":{
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 1,
+                    "required": true
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {}
       },
       "delete": {
@@ -102,7 +148,7 @@
             "in": "path",
             "required": true,
             "description": "Todolist id for deleted",
-            "schema":{
+            "schema": {
               "type": "string",
               "minLength": 1,
               "maxLength": 100
